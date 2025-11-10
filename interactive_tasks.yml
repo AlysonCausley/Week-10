@@ -1,0 +1,28 @@
+- name: Iterative Tasks Playbook
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Copy files 10 times to the remote server
+      copy:
+        src: /path/to/local/file.txt
+        dest: "/path/to/remote/directory/file{{ item }}.txt"
+      with_sequence: start=1 end=10
+      loop_control:
+        loop_var: item
+
+    - name: Change permissions to 644 on the copied files
+      file:
+        path: "/path/to/remote/directory/file{{ item }}.txt"
+        mode: '0644'
+      with_sequence: start=1 end=10
+      loop_control:
+        loop_var: item
+
+    - name: Delete the 10 copied files
+      file:
+        path: "/path/to/remote/directory/file{{ item }}.txt"
+        state: absent
+      with_sequence: start=1 end=10
+      loop_control:
+        loop_var: item
