@@ -18,7 +18,7 @@
 
     - name: Copy a sample file to the remote home directory if it doesn't exist
       copy:
-        src: /path/to/local/samplefile.txt
+        src: \\wsl.localhost\Ubuntu\home\acausley\samplefile.txt
         dest: "{{ ansible_user_dir }}/samplefile.txt"
         force: no
       when: ansible_facts['os_family'] in ['Debian', 'RedHat']
@@ -31,7 +31,7 @@
 
     - name: Create a new directory if it doesn't exist
       file:
-        path: /path/to/directory
+        path: \\wsl.localhost\Ubuntu\home\acausley\week10
         state: directory
       when: not ansible_facts['ansible_facts']['ansible_facts']['ansible_os_family'] in ['directory']
 

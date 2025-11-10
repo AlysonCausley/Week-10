@@ -5,15 +5,15 @@
   tasks:
     - name: Copy files 10 times to the remote server
       copy:
-        src: /path/to/local/file.txt
-        dest: "/path/to/remote/directory/file{{ item }}.txt"
+        src: \\wsl.localhost\Ubuntu\home\acausley\week10
+        dest: \\wsl.localhost\Ubuntu\home\acausley\week10
       with_sequence: start=1 end=10
       loop_control:
         loop_var: item
 
     - name: Change permissions to 644 on the copied files
       file:
-        path: "/path/to/remote/directory/file{{ item }}.txt"
+        path: \\wsl.localhost\Ubuntu\home\acausley\week10
         mode: '0644'
       with_sequence: start=1 end=10
       loop_control:
@@ -21,7 +21,7 @@
 
     - name: Delete the 10 copied files
       file:
-        path: "/path/to/remote/directory/file{{ item }}.txt"
+        path: \\wsl.localhost\Ubuntu\home\acausley\week10
         state: absent
       with_sequence: start=1 end=10
       loop_control:
